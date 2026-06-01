@@ -1,0 +1,36 @@
+# Ruby .gitignore
+
+# Bundler
+vendor/bundle/
+.bundle/
+
+# Build output
+pkg/
+
+# Rails
+log/
+tmp/
+storage/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+
+# Cache
+.ruby-version
+.rbenv-vars
