@@ -1,195 +1,163 @@
 <div align="center">
 
-# 🤖 GitHub Agent Skill
+[![Z.ai Coding Plans](https://img.shields.io/badge/Z.ai-Coding_Plans-7C3AED?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEyIDJMMiA3bDEwIDUgMTAtNS0xMC01eiIvPjxwYXRoIGQ9Ik0yIDE3bDEwIDUgMTAtNSIvPjxwYXRoIGQ9Ik0yIDEybDEwIDUgMTAtNSIvPjwvc3ZnPg==)](https://z.ai/subscribe?ic=ROK78RJKNW)
 
-**One Prompt → Production GitHub Repository**
+# 🚀 Get 10% OFF Z.ai Coding Plans
 
-A unified orchestration skill for GLM that chains together all GitHub operations into seamless end-to-end workflows.
+**Access the latest GLM models for coding with an exclusive discount**
 
-[![Skill](https://img.shields.io/badge/z.ai-Skill-blue?style=flat-square)](https://z.ai)
-[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](./LICENSE)
+[👉 Claim Your 10% OFF →](https://z.ai/subscribe?ic=ROK78RJKNW)
 
-</div>
-
----
-
-<div align="center">
-
-<a href="https://z.ai/subscribe?ic=ROK78RJKNW">
-<img src="https://img.shields.io/badge/🚀_Z.ai_Coding_Plans-10%25_OFF-6366f1?style=for-the-badge&labelColor=0f172a&color=6366f1" alt="Z.ai Coding Plans - 10% OFF" />
-</a>
-
-### ✨ Supercharge your development with **Z.ai** — the latest GLM models, AI-powered coding, and one-prompt workflows
-
-[![Plans](https://img.shields.io/badge/Subscribe-10%25_OFF_with_token-8b5cf6?style=flat-square)](https://z.ai/subscribe?ic=ROK78RJKNW)
-[![GLM](https://img.shields.io/badge/Powered_by-GLM_Latest-3178C6?style=flat-square)](https://z.ai)
-[![AI Coding](https://img.shields.io/badge/Feature-AI_Coding_Agent-06B6D4?style=flat-square)](https://z.ai)
-
-**Use invite code → [z.ai/subscribe?ic=ROK78RJKNW](https://z.ai/subscribe?ic=ROK78RJKNW) ← for 10% OFF any plan**
+*Power your development with state-of-the-art AI models — from code generation to full-stack apps*
 
 </div>
 
 ---
 
-## What It Does
+# GitHub Agent — One Prompt to Production Repository
 
-Type a single prompt like:
+A unified orchestration skill for GLM that turns a single natural language prompt into a fully configured, tested, CI/CD-ready GitHub repository. No more juggling individual tools for git, Actions, security, and testing — this agent chains them together into seamless end-to-end workflows.
 
-> *"Build a SaaS dashboard with authentication, charts, and Stripe integration"*
+## ✨ What It Does
 
-And the GitHub Agent creates a **complete, CI/CD-ready GitHub repository** — repo, project scaffold, smart commits, workflows, security config, and pushes it all to GitHub.
+Describe your project in plain English, and the GitHub Agent handles everything:
 
-## 8 Orchestration Workflows
+```
+"Build a SaaS dashboard with authentication, charts, and Stripe integration"
+```
 
-| # | Workflow | What It Does |
+↓ The agent creates a repo, scaffolds the project, generates & runs tests, sets up CI/CD, configures security, and pushes to GitHub — all from that one prompt.
+
+## 🧠 9 Orchestration Workflows
+
+| # | Workflow | Description |
 |---|----------|-------------|
-| 1 | **One-Prompt Project → GitHub** | Describe a project → get a fully configured repo |
-| 2 | **Repo Creation & Init** | Create repos with README, .gitignore, LICENSE |
-| 3 | **Project Scaffolding** | Generate full project structures from 7 templates |
+| 1 | **One-Prompt Project → GitHub** | Full pipeline: describe → repo → code → test → CI/CD → push |
+| 2 | **Repository Creation** | Create & initialize GitHub repos with proper defaults |
+| 3 | **Project Scaffolding** | Generate project structure from 7 templates |
 | 4 | **Smart Git Operations** | Intelligent conventional commits + branch management |
-| 5 | **CI/CD Pipeline Setup** | Generate GitHub Actions workflows |
-| 6 | **Security & Quality** | Dependabot, CodeQL, branch protection |
-| 7 | **Release Management** | Versioning, tagging, changelogs, GitHub Releases |
+| 5 | **CI/CD Pipeline Setup** | Generate GitHub Actions workflows (7 types) |
+| 6 | **Security & Quality** | Dependabot, CodeQL, branch protection, secret scanning |
+| 7 | **Release Management** | Semantic versioning, changelogs, GitHub Releases |
 | 8 | **Issue & PR Management** | Smart labeling, templates, review workflows |
+| 9 | **Test & Verify** 🆕 | **Automated test generation, execution, coverage, and Proof-of-Work** |
 
-## 5 Executable Scripts
+## 🧪 Workflow 9: Test & Verify (NEW)
 
-| Script | Lines | Purpose |
-|--------|-------|---------|
-| `repo_init.py` | 388 | Create GitHub repos via gh CLI or API fallback |
-| `scaffold.py` | 933 | Generate project structures from 7 templates + feature add-ons |
-| `smart_commit.py` | 390 | Analyze changes, generate conventional commit messages, scan for secrets |
-| `actions_gen.py` | 549 | Generate 7 types of GitHub Actions workflows |
-| `release.py` | 431 | Semantic versioning, changelog generation, GitHub Release creation |
+The **Automated Intelligence Testing System** ensures every project is verified before it reaches GitHub:
 
-## 7 Project Templates
+1. **Source Analysis** — Scans all source files, extracts testable units (functions, classes, methods, components, API handlers)
+2. **Test Generation** — Creates tailored test suites for each module (Vitest/Jest/pytest/go-test)
+3. **Test Execution** — Runs the full suite and collects results
+4. **Coverage Measurement** — Tracks code coverage percentage
+5. **Proof-of-Work Report** — Generates `TEST_REPORT.md` with verifiable evidence
 
-`nextjs-fullstack` · `react-spa` · `node-api` · `python-api` · `python-cli` · `go-service` · `static-site`
+```bash
+# Full pipeline: generate + run + report
+python3 scripts/smart_test.py --path ./my-project --all
 
-## Feature Add-ons
+# Generate tests only
+python3 scripts/smart_test.py --path ./my-project --generate
+
+# Full pipeline + auto-commit
+python3 scripts/smart_test.py --path ./my-project --all --commit
+```
+
+### Supported Languages & Frameworks
+
+| Language | Test Framework | Analysis Method |
+|----------|---------------|-----------------|
+| TypeScript/JavaScript | Vitest / Jest | Regex-based extraction |
+| Python | pytest | AST parsing |
+| Go | go test | Regex-based extraction |
+
+## 🏗️ 7 Project Templates
+
+| Template | Stack |
+|----------|-------|
+| `nextjs-fullstack` | Next.js 16 + TypeScript + Tailwind + Prisma |
+| `react-spa` | React + Vite + TypeScript |
+| `node-api` | Express/Fastify REST API |
+| `python-api` | FastAPI REST API |
+| `python-cli` | Python CLI with Typer |
+| `go-service` | Go microservice |
+| `static-site` | Static HTML/CSS/JS |
+
+### Feature Add-ons
 
 `auth` · `docker` · `stripe` · `charts` · `testing` · `database` · `api`
 
-## 7 CI/CD Workflow Types
-
-`ci` · `cd-deploy` · `docker` · `release` · `dependabot` · `codeql` · `stale`
-
-## Quick Start
-
-### 1. Setup Environment
-
-```bash
-bash scripts/setup.sh
-```
-
-### 2. Create a Repository
-
-```bash
-python3 scripts/repo_init.py \
-  --name "my-project" \
-  --description "My awesome project" \
-  --template "nextjs-fullstack" \
-  --language "typescript"
-```
-
-### 3. Scaffold the Project
-
-```bash
-python3 scripts/scaffold.py \
-  --template "nextjs-fullstack" \
-  --path "./my-project" \
-  --features "auth,docker,stripe,charts"
-```
-
-### 4. Generate CI/CD Workflows
-
-```bash
-python3 scripts/actions_gen.py \
-  --path "./my-project" \
-  --workflows "ci,dependabot,codeql" \
-  --language "typescript"
-```
-
-### 5. Commit & Push
-
-```bash
-python3 scripts/smart_commit.py \
-  --path "./my-project" \
-  --push
-```
-
-### 6. Create a Release
-
-```bash
-python3 scripts/release.py \
-  --path "./my-project" \
-  --action create
-```
-
-## File Structure
+## 📁 Project Structure
 
 ```
 github-agent/
-├── SKILL.md                          # Main skill instructions (378 lines)
+├── SKILL.md                    # Main skill definition (9 workflows)
 ├── scripts/
-│   ├── setup.sh                      # Environment setup & validation
-│   ├── repo_init.py                  # GitHub repo creation
-│   ├── scaffold.py                   # Project scaffolding from templates
-│   ├── smart_commit.py              # Conventional commits + secret scanning
-│   ├── actions_gen.py               # GitHub Actions workflow generator
-│   └── release.py                   # Release management
+│   ├── repo_init.py            # Create GitHub repos
+│   ├── scaffold.py             # Generate project structures
+│   ├── smart_commit.py         # Conventional commits + secret scanning
+│   ├── actions_gen.py          # GitHub Actions workflow generator
+│   ├── release.py              # Version management + releases
+│   └── smart_test.py           # 🆕 Automated testing + proof-of-work
 ├── references/
-│   ├── templates.md                  # Project template specifications
-│   ├── actions_catalog.md            # CI/CD workflow catalog
-│   └── conventions.md               # Git conventions & commit format
-└── assets/
-    └── gitignore_templates/          # .gitignore files for 6 languages
-        ├── Node.gitignore
-        ├── Python.gitignore
-        ├── Go.gitignore
-        ├── Rust.gitignore
-        ├── Java.gitignore
-        └── Ruby.gitignore
+│   ├── templates.md            # Template catalog
+│   ├── actions_catalog.md      # Actions workflow catalog
+│   └── conventions.md          # Commit conventions reference
+├── assets/
+│   └── gitignore_templates/    # 6 .gitignore templates
+└── README.md                   # This file
 ```
 
-## Key Design Decisions
+## 🚀 Quick Start
 
-- **Dual-mode**: Uses gh CLI when available, falls back to GitHub API via curl
-- **Secret scanning**: Blocks commits containing API keys, tokens, private keys
-- **Conventional commits**: Auto-generates from file analysis (type + scope + description)
-- **Safety guardrails**: Never force push, never push directly to protected branches, draft PRs by default
-- **Template variables**: All scaffold files support {project_name}, {project_description} placeholders
+### As a GLM Skill
 
-## Demo
+1. Place this directory in your GLM skills folder
+2. GLM will automatically detect and activate the skill when you mention GitHub operations
+3. Just describe what you want:
 
-This skill was used to create a full SaaS dashboard repository in a single prompt:
+> "Create a new Next.js project with auth and Stripe, push it to GitHub, and make sure it passes tests"
 
-**[roman-ryzenadvanced/zdash](https://github.com/roman-ryzenadvanced/zdash)**
+### Using the Scripts Directly
 
-The ZDash repo was created with:
-- repo_init.py → Created the GitHub repo
-- scaffold.py → Generated Next.js 16 project with auth, Stripe, charts, Docker
-- actions_gen.py → Added CI, Dependabot, CodeQL workflows
-- smart_commit.py → Committed with conventional message and pushed
+```bash
+# 1. Create a repo
+python3 scripts/repo_init.py --name "my-project" --description "My awesome project"
 
-## Integration with Existing Skills
+# 2. Scaffold the project
+python3 scripts/scaffold.py --template nextjs-fullstack --path ./my-project --features "auth,stripe,testing"
 
-This agent orchestrates capabilities that overlap with several existing z.ai skills:
+# 3. Generate and run tests
+python3 scripts/smart_test.py --path ./my-project --all
 
-- **git-workflow** — This agent's smart_commit.py provides superior commit message generation
-- **github-actions-gen** — This agent's actions_gen.py provides more comprehensive workflow generation
-- **github-issue-resolver** — For autonomous issue fixing, that skill's guardrails system is more robust
-- **ruflo-github-automation** — This agent incorporates its review frameworks and release patterns
+# 4. Commit and push
+python3 scripts/smart_commit.py --path ./my-project --init --push
 
-## License
+# 5. Set up CI/CD
+python3 scripts/actions_gen.py --path ./my-project --workflows "ci,dependabot,codeql"
 
-MIT License — see the LICENSE file for details.
+# 6. Create a release
+python3 scripts/release.py --action create --path ./my-project
+```
+
+## 🛡️ Safety & Guardrails
+
+- Never pushes to protected branches directly
+- Never force pushes
+- Secret scanning before every commit (API keys, tokens, passwords)
+- Draft PRs by default
+- Confirmation required for destructive operations
+
+## 📄 License
+
+MIT
 
 ---
 
 <div align="center">
 
-**Built for z.ai · Empowering developers with AI-powered GitHub workflows**
+**Built for [Z.ai](https://z.ai) — Power your code with the latest GLM models**
+
+[Get 10% OFF coding plans →](https://z.ai/subscribe?ic=ROK78RJKNW)
 
 </div>

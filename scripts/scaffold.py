@@ -886,14 +886,134 @@ def _add_charts_feature(repo_dir, project_name, description, template_name):
 
 
 def _add_testing_feature(repo_dir, project_name, description, template_name):
-    """Add testing infrastructure."""
+    """Add comprehensive testing infrastructure with smart test integration."""
+    template = TEMPLATES.get(template_name, {})
+    language = template.get("language", "typescript")
+
     test_dir = repo_dir / "tests"
     test_dir.mkdir(parents=True, exist_ok=True)
-    (test_dir / "test_main.py" if template_name == "python-api" else test_dir / "main.test.ts").write_text(
-        """// Test file - add your tests here
+
+    if language in ("typescript", "javascript"):
+        # TypeScript/JavaScript testing setup
+        test_content = """// Auto-generated test suite — customize these tests for your project
+// Run with: npx vitest
+
+import { describe, it, expect } from 'vitest';
+
+describe('Project Setup', () => {
+  it('should have a package.json', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const pkgPath = path.resolve(process.cwd(), 'package.json');
+    expect(fs.existsSync(pkgPath)).toBe(true);
+  });
+
+  it('should have valid package.json with name and version', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const pkg = JSON.parse(
+      fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8')
+    );
+    expect(pkg.name).toBeDefined();
+    expect(pkg.version).toBeDefined();
+  });
+
+  it('should have a src directory', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    expect(fs.existsSync(path.resolve(process.cwd(), 'src'))).toBe(true);
+  });
+});
 """
+        (test_dir / "setup.test.ts").write_text(test_content)
+        print("  ✅ Added testing infrastructure (Vitest + setup tests)")
+
+    elif language == "python":
+        # Python testing setup
+        init_file = test_dir / "__init__.py"
+        if not init_file.exists():
+            init_file.write_text("")
+
+        conftest_content = """\"\"\"Shared test fixtures.\"\"\"
+
+import pytest
+"""
+        (test_dir / "conftest.py").write_text(conftest_content)
+
+        test_content = """\"\"\"Auto-generated test suite — customize these tests for your project
+Run with: pytest tests/ -v
+\"\"\"
+
+import pytest
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).parent.parent
+
+
+class TestProjectSetup:
+    \"\"\"Verify project structure and configuration.\"\"\"
+
+    def test_pyproject_toml_exists(self):
+        assert (PROJECT_ROOT / "pyproject.toml").exists()
+
+    def test_project_has_name(self):
+        import tomllib
+        with open(PROJECT_ROOT / "pyproject.toml", "rb") as f:
+            data = tomllib.load(f)
+        assert "project" in data
+        assert "name" in data["project"]
+
+    def test_source_directory_exists(self):
+        has_app = (PROJECT_ROOT / "app").exists()
+        has_src = (PROJECT_ROOT / "src").exists()
+        assert has_app or has_src, "No app/ or src/ directory found"
+"""
+        (test_dir / "test_setup.py").write_text(test_content)
+        print("  ✅ Added testing infrastructure (pytest + conftest + setup tests)")
+
+    elif language == "go":
+        # Go testing setup
+        health_test = """package main
+
+import (
+\t"os"
+\t"testing"
+)
+
+func TestProjectSetup(t *testing.T) {
+\tt.Run("go.mod exists", func(t *testing.T) {
+\t\tif _, err := os.Stat("go.mod"); os.IsNotExist(err) {
+\t\t\tt.Error("go.mod not found")
+\t\t}
+\t})
+
+\tt.Run("README exists", func(t *testing.T) {
+\t\tif _, err := os.Stat("README.md"); os.IsNotExist(err) {
+\t\t\tt.Error("README.md not found")
+\t\t}
+\t})
+}
+"""
+        test_file = repo_dir / "health_test.go"
+        test_file.write_text(health_test)
+        print("  ✅ Added testing infrastructure (go test + health tests)")
+
+    else:
+        # Generic
+        test_content = """# Smoke test
+def test_project_exists():
+    assert True
+"""
+        (test_dir / "test_smoke.py").write_text(test_content)
+        print("  ✅ Added testing infrastructure (generic)")
+
+    # Always create a marker file indicating smart_test.py is available
+    smart_test_note = test_dir / ".smart-test-enabled"
+    smart_test_note.write_text(
+        "# This project has Smart Test support.\n"
+        "# Run: python3 scripts/smart_test.py --path . --all\n"
     )
-    print("  ✅ Added testing infrastructure")
+    print("  ✅ Smart Test System enabled (run smart_test.py for full analysis)")
 
 
 def _add_database_feature(repo_dir, project_name, description, template_name):

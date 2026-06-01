@@ -1,6 +1,6 @@
 ---
 name: github-agent
-description: "Unified GitHub Agent that orchestrates end-to-end GitHub operations from a single prompt. Handles repository creation, project scaffolding, smart commits, branch management, CI/CD pipeline setup, security configuration (CodeQL, Dependabot), release workflows, and issue/PR management. Use this skill whenever the user wants to create a GitHub repo, scaffold a project and push it to GitHub, set up CI/CD pipelines, manage releases, or perform any combined GitHub workflow — especially when they describe a project idea and want it turned into a ready-to-use repository. Also use when users mention 'GitHub agent', 'create repo from prompt', 'one-prompt project', 'scaffold and push', 'setup GitHub Actions', or 'full GitHub workflow'."
+description: "Unified GitHub Agent that orchestrates end-to-end GitHub operations from a single prompt. Handles repository creation, project scaffolding, smart commits, branch management, CI/CD pipeline setup, security configuration (CodeQL, Dependabot), release workflows, automated test generation with proof-of-work, and issue/PR management. Use this skill whenever the user wants to create a GitHub repo, scaffold a project and push it to GitHub, set up CI/CD pipelines, generate and run tests, manage releases, or perform any combined GitHub workflow — especially when they describe a project idea and want it turned into a ready-to-use repository. Also use when users mention 'GitHub agent', 'create repo from prompt', 'one-prompt project', 'scaffold and push', 'setup GitHub Actions', 'test my code', 'proof of work', or 'full GitHub workflow'."
 ---
 
 # GitHub Agent — One Prompt to Production Repository
@@ -15,6 +15,8 @@ This skill is a unified orchestration layer that combines all GitHub operations 
 - User wants branch management or PR workflows: *"Create a feature branch and PR for the login feature"*
 - User mentions GitHub operations in combination: *"Initialize a repo, add CI, and push it"*
 - User asks for release/version management: *"Create a v1.0.0 release with changelog"*
+- User wants automated testing or proof of work: *"Test the project and generate proof-of-work"* or *"Run tests before pushing"*
+- User wants verification before commit: *"Make sure the code works before pushing"*
 
 ## Core Orchestration Workflows
 
@@ -29,11 +31,12 @@ This is the flagship workflow. A user describes a project, and the agent creates
 2. **Read `references/templates.md`** — Select the best-matching project template
 3. **Create the GitHub repository** — Run `scripts/repo_init.py`
 4. **Scaffold the project** — Run `scripts/scaffold.py` with the selected template
-5. **Generate initial commit** — Run `scripts/smart_commit.py --init`
-6. **Set up CI/CD** — Run `scripts/actions_gen.py` (generate appropriate workflows)
-7. **Configure security** — Add Dependabot config, CodeQL workflow if applicable
-8. **Push to GitHub** — Run `scripts/smart_commit.py --push`
-9. **Report the result** — Show repo URL, branch info, and what was configured
+5. **Generate and run tests** — Run `scripts/smart_test.py --all` (generate test suite, execute, produce proof-of-work)
+6. **Generate initial commit** — Run `scripts/smart_commit.py --init`
+7. **Set up CI/CD** — Run `scripts/actions_gen.py` (generate appropriate workflows)
+8. **Configure security** — Add Dependabot config, CodeQL workflow if applicable
+9. **Push to GitHub** — Run `scripts/smart_commit.py --push` (includes TEST_REPORT.md)
+10. **Report the result** — Show repo URL, branch info, test results, and what was configured
 
 **Example:**
 > User: "Build a SaaS dashboard with authentication, charts, and Stripe integration"
@@ -194,6 +197,82 @@ Manage issues and pull requests with smart labeling and review.
 4. Review checklist validation before merge
 5. Squash merge by default (configurable)
 
+### Workflow 9: Test & Verify (Automated Intelligence Testing + Proof of Work)
+
+This is the automated testing and verification workflow. It analyzes the project's source code, generates tailored test suites, executes them, and produces a verifiable Proof-of-Work report that is committed as an artifact in the repository. This ensures that every project produced by the agent has been tested and validated before it reaches GitHub.
+
+**When to use:**
+- As part of the One-Prompt workflow (step 5) — automatically runs after scaffolding
+- Before any commit or push — to verify the code works
+- When the user asks to "test the project", "run tests", "generate proof of work", or "verify the code works"
+- When the user wants confidence that generated code is functional
+
+**Steps:**
+1. **Detect language and framework** — Automatically identifies the project's language, framework, and test runner (Vitest/Jest/pytest/go-test)
+2. **Analyze source code** — `smart_test.py` scans all source files and extracts testable units:
+   - Python: Functions, classes, methods (via AST parsing)
+   - TypeScript/JavaScript: Functions, classes, React components, API route handlers (via regex)
+   - Go: Functions, methods, structs, HTTP handlers (via regex)
+3. **Generate test files** — Creates tailored test files for each module:
+   - Unit tests for every detected function/class/method
+   - API handler tests with mock Request/Response
+   - Component tests with render testing stubs
+   - Project health/structural tests (verify config files exist, imports work)
+   - Shared fixtures (conftest.py for Python, setup for JS)
+4. **Execute test suite** — Runs the full test suite using the detected framework
+5. **Collect coverage data** — Measures code coverage percentage
+6. **Generate TEST_REPORT.md** — Produces a comprehensive Proof-of-Work artifact containing:
+   - Executive summary with pass/fail/skip/coverage metrics
+   - Source code analysis breakdown (files scanned, units found)
+   - List of generated test files
+   - Test results with command used and duration
+   - Coverage percentage
+   - Verification checklist (all items checked off)
+   - Test execution proof block (machine-readable)
+   - Scanned source files list
+7. **Commit artifacts** — Optionally commits test files and TEST_REPORT.md to the repo
+
+**Script usage:**
+```bash
+# Full pipeline: generate + run + report
+python3 scripts/smart_test.py --path /path/to/repo --all
+
+# Generate tests only (don't run)
+python3 scripts/smart_test.py --path /path/to/repo --generate
+
+# Run existing tests and generate report
+python3 scripts/smart_test.py --path /path/to/repo --run --report
+
+# Full pipeline + auto-commit
+python3 scripts/smart_test.py --path /path/to/repo --all --commit
+
+# Override language detection
+python3 scripts/smart_test.py --path /path/to/repo --all --language python
+```
+
+**What `smart_test.py` generates by project type:**
+
+| Project Type | Test Framework | Test Types Generated |
+|---|---|---|
+| nextjs-fullstack | Vitest | Component tests, API handler tests, health tests, utility tests |
+| react-spa | Vitest | Component tests, hook tests, health tests |
+| node-api | Vitest/Jest | Route handler tests, middleware tests, health tests |
+| python-api | pytest | API endpoint tests (with httpx), model tests, config tests, health tests |
+| python-cli | pytest | Command tests, argument parsing tests, health tests |
+| go-service | go test | Function tests, handler tests, struct tests, health tests |
+| static-site | pytest | Smoke tests, structure tests |
+
+**Proof-of-Work artifact (TEST_REPORT.md):**
+- Contains a verification checklist that confirms all steps were executed
+- Includes a machine-readable execution proof block with exact counts
+- Provides the exact test command used (reproducible)
+- Lists all scanned source files
+- Badge showing PASS/FAIL status
+- This report is committed alongside the code as verifiable evidence
+
+**Integration with Workflow 1 (One-Prompt):**
+When using the One-Prompt workflow, step 5 automatically runs the full test pipeline. The generated TEST_REPORT.md is included in the initial commit alongside the project code, providing immediate proof that the generated code has been tested and validated.
+
 ## Script Reference
 
 ### Setup & Dependencies
@@ -306,6 +385,38 @@ python3 scripts/release.py --action changelog --path "/path/to/repo"
 python3 scripts/release.py --action list --path "/path/to/repo"
 ```
 
+### Script: `smart_test.py`
+
+Automated intelligence testing system — analyzes code, generates tests, executes them, and produces proof-of-work.
+
+```bash
+# Full pipeline: generate + run + report
+python3 scripts/smart_test.py --path "/path/to/repo" --all
+
+# Generate tests only (don't run)
+python3 scripts/smart_test.py --path "/path/to/repo" --generate
+
+# Run existing tests and generate report
+python3 scripts/smart_test.py --path "/path/to/repo" --run --report
+
+# Full pipeline + auto-commit test artifacts
+python3 scripts/smart_test.py --path "/path/to/repo" --all --commit
+
+# Override language/framework detection
+python3 scripts/smart_test.py --path "/path/to/repo" --all --language python --framework pytest
+```
+
+**What it does:**
+- Detects project language and test framework automatically
+- Scans all source files and extracts testable units (functions, classes, methods, components, API handlers)
+- Generates tailored test files with meaningful test cases for each unit
+- Executes the full test suite using the appropriate runner
+- Collects coverage metrics
+- Generates `TEST_REPORT.md` as a verifiable Proof-of-Work artifact
+- Optionally commits test files and report to the repository
+
+**Supported frameworks:** Vitest, Jest, pytest, go-test
+
 ## Decision Guide: Which Workflow to Use
 
 | User Says | Workflow |
@@ -318,6 +429,7 @@ python3 scripts/release.py --action list --path "/path/to/repo"
 | "Configure security" or "Add Dependabot/CodeQL" | Workflow 6 (Security) |
 | "Create a release" or "Generate changelog" | Workflow 7 (Release) |
 | "Create an issue" or "Open a PR" | Workflow 8 (Issue/PR) |
+| "Test the project", "Run tests", or "Generate proof of work" | Workflow 9 (Test & Verify) |
 
 ## Integration with Existing Skills
 
