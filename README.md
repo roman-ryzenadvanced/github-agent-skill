@@ -14,6 +14,24 @@ A unified orchestration skill for GLM that chains together all GitHub operations
 
 ---
 
+<div align="center">
+
+<a href="https://z.ai/subscribe?ic=ROK78RJKNW">
+<img src="https://img.shields.io/badge/🚀_Z.ai_Coding_Plans-10%25_OFF-6366f1?style=for-the-badge&labelColor=0f172a&color=6366f1" alt="Z.ai Coding Plans - 10% OFF" />
+</a>
+
+### ✨ Supercharge your development with **Z.ai** — the latest GLM models, AI-powered coding, and one-prompt workflows
+
+[![Plans](https://img.shields.io/badge/Subscribe-10%25_OFF_with_token-8b5cf6?style=flat-square)](https://z.ai/subscribe?ic=ROK78RJKNW)
+[![GLM](https://img.shields.io/badge/Powered_by-GLM_Latest-3178C6?style=flat-square)](https://z.ai)
+[![AI Coding](https://img.shields.io/badge/Feature-AI_Coding_Agent-06B6D4?style=flat-square)](https://z.ai)
+
+**Use invite code → [z.ai/subscribe?ic=ROK78RJKNW](https://z.ai/subscribe?ic=ROK78RJKNW) ← for 10% OFF any plan**
+
+</div>
+
+---
+
 ## What It Does
 
 Type a single prompt like:
